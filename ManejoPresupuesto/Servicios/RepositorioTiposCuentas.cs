@@ -6,9 +6,11 @@ namespace ManejoPresupuesto.Servicios
 {
     public interface IRepositorioTiposCuentas
     {
+        Task Actualizar(TipoCuenta tipocuenta);
         Task Crear(TipoCuenta tipocuenta);
         Task<bool> Existe(string nombre, int usuarioId);
         Task<IEnumerable<TipoCuenta>> GetAll(int usuarioId);
+        Task<TipoCuenta> ObtenerPorId(int id, int usuarioId);
     }
     public class RepositorioTiposCuentas : IRepositorioTiposCuentas
     {
@@ -43,5 +45,20 @@ namespace ManejoPresupuesto.Servicios
 
             return await connection.QueryAsync<TipoCuenta>(@"SELECT Id, Nombre, Orden FROM TiposCuentas WHERE UsuarioId = @UsuarioId", new { usuarioId });
         }
+
+        public async Task Actualizar(TipoCuenta tipocuenta)
+        {
+            using var connection = new SqlConnection(connectionString);
+            // Permite ejecutar una Query que no va a retornar nada
+            await connection.ExecuteAsync(@"UPDATE TiposCuentas SET Nombre = @Nombre where Id = @Id",tipocuenta);
+        }
+
+        public async Task<TipoCuenta> ObtenerPorId(int id, int usuarioId)
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryFirstOrDefaultAsync<TipoCuenta>(@"Select Id,Nombre,Orden from TiposCuentas where Id = @Id and UsuarioId = @UsuarioId",
+                new {id,usuarioId});
+        }
     }
 }
+
