@@ -12,6 +12,7 @@ namespace ManejoPresupuesto.Servicios
         Task<bool> Existe(string nombre, int usuarioId);
         Task<IEnumerable<TipoCuenta>> GetAll(int usuarioId);
         Task<TipoCuenta> ObtenerPorId(int id, int usuarioId);
+        Task Ordenar(IEnumerable<TipoCuenta> tipoCuentasOrdenados);
     }
     public class RepositorioTiposCuentas : IRepositorioTiposCuentas
     {
@@ -25,8 +26,8 @@ namespace ManejoPresupuesto.Servicios
         {   
             using var connection = new SqlConnection(connectionString);
             var id = await connection.QuerySingleAsync<int>
-                   (@"INSERT INTO TiposCuentas (Nombre, UsuarioId, Orden) values (@Nombre,@UsuarioId,0);
-                   SELECT SCOPE_IDENTITY();",tipocuenta);
+                   ("TiposCuentas_Insertar", new {UsuarioId =  tipocuenta.UsuarioId, Nombre = tipocuenta.Nombre},
+                   commandType: System.Data.CommandType.StoredProcedure);
 
             tipocuenta.Id = id; 
         }
@@ -44,7 +45,7 @@ namespace ManejoPresupuesto.Servicios
         {
             using var connection = new SqlConnection(connectionString);
 
-            return await connection.QueryAsync<TipoCuenta>(@"SELECT Id, Nombre, Orden FROM TiposCuentas WHERE UsuarioId = @UsuarioId", new { usuarioId });
+            return await connection.QueryAsync<TipoCuenta>(@"SELECT Id, Nombre, Orden FROM TiposCuentas WHERE UsuarioId = @UsuarioId ORDER BY Orden", new { usuarioId });
         }
 
         public async Task Actualizar(TipoCuenta tipocuenta)
@@ -67,6 +68,12 @@ namespace ManejoPresupuesto.Servicios
             await connection.ExecuteAsync(@"DELETE TiposCuentas Where Id = @Id", new {id});
         }
    
+        public async Task Ordenar(IEnumerable<TipoCuenta> tipoCuentasOrdenados)
+        {
+            var query = "UPDATE TiposCuentas SET Orden = @Orden where Id = @Id;";
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync(query, tipoCuentasOrdenados);
+        }
     }
 }
 
