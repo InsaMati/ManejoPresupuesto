@@ -18,13 +18,13 @@
         </tr>
     </thead>
 
-    <tbody>
+    <tbody id="reordenable">
         @foreach (var TipoCuenta in Model)
         {
             <tr>
                 <td>
                     <a class="btn btn-primary" asp-action="Editar" asp-route-id="@TipoCuenta.Id">Editar</a>
-                    <a class="btn btn-danger">Borrar</a>
+                    <a class="btn btn-danger" asp-action="Eliminar" asp-route-id="@TipoCuenta.Id">Borrar</a>
                 </td>
 
                 <td>@TipoCuenta.Nombre</td>
@@ -33,3 +33,10 @@
     </tbody>
 </table>
 
+@section Scripts{
+    <script>
+        $(function(){
+            $("#reordenable").sortable();
+        })
+    </script>
+}
