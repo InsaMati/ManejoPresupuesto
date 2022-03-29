@@ -2551,11 +2551,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\matia\\source\\repos\\ManejoPresupuesto\\ManejoPresupuesto\\ManejoPresupuesto.csproj",
+      "projectUniqueName": "C:\\Users\\matia\\OneDrive\\Escritorio\\ManejoPresupuesto\\ManejoPresupuesto\\ManejoPresupuesto.csproj",
       "projectName": "ManejoPresupuesto",
-      "projectPath": "C:\\Users\\matia\\source\\repos\\ManejoPresupuesto\\ManejoPresupuesto\\ManejoPresupuesto.csproj",
+      "projectPath": "C:\\Users\\matia\\OneDrive\\Escritorio\\ManejoPresupuesto\\ManejoPresupuesto\\ManejoPresupuesto.csproj",
       "packagesPath": "C:\\Users\\matia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\matia\\source\\repos\\ManejoPresupuesto\\ManejoPresupuesto\\obj\\",
+      "outputPath": "C:\\Users\\matia\\OneDrive\\Escritorio\\ManejoPresupuesto\\ManejoPresupuesto\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\matia\\AppData\\Roaming\\NuGet\\NuGet.Config",
