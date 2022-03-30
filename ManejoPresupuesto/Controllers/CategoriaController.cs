@@ -77,6 +77,7 @@ namespace ManejoPresupuesto.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
         public async Task<IActionResult> Borrar(int id)
         {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();

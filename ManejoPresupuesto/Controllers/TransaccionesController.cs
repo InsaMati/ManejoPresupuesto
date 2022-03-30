@@ -158,7 +158,7 @@ namespace ManejoPresupuesto.Controllers
 
             await repositorioTransacciones.Borrar(id);
             return RedirectToAction("Index");
-        }
+        }   
 
         private async Task<IEnumerable<SelectListItem>> ObtenerCuentas(int usuarioId)
         {

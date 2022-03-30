@@ -75,5 +75,19 @@ namespace ManejoPresupuesto.Servicios
             await connection.ExecuteAsync("Transacciones_Borrar",
                 new { id }, commandType: System.Data.CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<Transaccion>> ObtenerPorCuentaId(ObtenerTransaccionesPorCuenta modelo)
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryAsync<Transaccion>
+                (@"SELECT t.Id, t.Monto,t.FechaTransaccion,c.Nombre as Categoria, cu.Nombre as Cuenta, c.TipoOperacionId
+                   FROM Transacciones t
+                   inner join Categorias c
+                   on c.id = t.CategoriaId
+                   inner join Cuentas cu
+                   on cu.id = t.CuentaId
+                   where t.CuentaId = @CuentaId and t.UsuarioId = @UsuarioId
+                   and FechaTransaccion BETWEEN @FechaInicio and @FechaFin ", modelo);
+        }
     }
 }

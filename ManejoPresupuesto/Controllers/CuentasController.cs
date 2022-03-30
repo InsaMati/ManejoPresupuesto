@@ -12,13 +12,19 @@ namespace ManejoPresupuesto.Controllers
         private readonly IServiciosUsuarios serviciosUsuarios;
         private readonly IRepositorioCuentas repositorioCuentas;
         private readonly IMapper mapper;
+        private readonly IRepositorioTransacciones repositorioTransacciones;
 
-        public CuentasController(IRepositorioTiposCuentas repositorioTiposCuentas, IServiciosUsuarios serviciosUsuarios,IRepositorioCuentas repositorioCuentas, IMapper mapper)
+        public CuentasController(IRepositorioTiposCuentas repositorioTiposCuentas, 
+            IServiciosUsuarios serviciosUsuarios,
+            IRepositorioCuentas repositorioCuentas, 
+            IMapper mapper,
+            IRepositorioTransacciones repositorioTransacciones)
         {
             this.repositorioTiposCuentas = repositorioTiposCuentas;
             this.serviciosUsuarios = serviciosUsuarios;
             this.repositorioCuentas = repositorioCuentas;
             this.mapper = mapper;
+            this.repositorioTransacciones = repositorioTransacciones;
         }
 
         public async Task<IActionResult> Index()
@@ -32,6 +38,61 @@ namespace ManejoPresupuesto.Controllers
                 Cuentas = grupo.AsEnumerable()
               
             }).ToList();
+
+            return View(modelo);
+        }
+
+
+        public async Task<IActionResult> Detalle (int id, int mes, int año)
+        {
+            var usuarioId = serviciosUsuarios.ObtenerUsuarioId();
+            var cuenta = await repositorioCuentas.ObtenerPorId(id, usuarioId);
+
+            if(cuenta is null)
+            {
+                return RedirectToAction("NoEncontrado", "Home");
+            }
+
+            DateTime fechaInicio;
+            DateTime fechaFin;
+
+            if(mes <= 0 || mes > 12 || año <= 1900)
+            {
+                var hoy = DateTime.Today;
+                fechaInicio = new DateTime(hoy.Year, hoy.Month, 1);
+            }
+            else
+            {
+                fechaInicio = new DateTime(año, mes, 1);
+            }
+
+            fechaFin = fechaInicio.AddMonths(1).AddDays(-1);
+
+            var obtenerTransaccionesPorCuenta = new ObtenerTransaccionesPorCuenta()
+            {
+                CuentaId = id,
+                UsuarioId = usuarioId,
+                FechaInicio = fechaInicio,
+                FechaFin = fechaFin,
+            };
+
+            var transacciones = await repositorioTransacciones
+                .ObtenerPorCuentaId(obtenerTransaccionesPorCuenta);
+
+            var modelo = new ReporteTransaccionesDetalladas();
+            ViewBag.Cuenta = cuenta.Nombre;
+
+            var transaccionesPorFecha = transacciones.OrderByDescending(x => x.FechaTransaccion)
+                .GroupBy(x => x.FechaTransaccion)
+                .Select(grupo => new ReporteTransaccionesDetalladas.TransaccionesPorFecha()
+                {
+                    FechaTransaccion = grupo.Key,
+                    Transacciones = grupo.AsEnumerable()
+                });
+
+            modelo.TransaccionesAgrupadas = transaccionesPorFecha;
+            modelo.FechaInicio = fechaInicio;
+            modelo.FechaFin = fechaFin;
 
             return View(modelo);
         }
@@ -80,17 +141,6 @@ namespace ManejoPresupuesto.Controllers
             {
                 return RedirectToAction("NoEncontrado", "Home");
             }
-
-
-            /*
-            var modelo = new CuentaCreacionViewModel()
-            {
-                Id = cuenta.Id,
-                Nombre = cuenta.Nombre,
-                TipoCuentaId = cuenta.TipoCuentaId,
-                Descripcion = cuenta.Descripcion,
-                Balance = cuenta.Balance,
-            };*/
 
             var modelo = mapper.Map<CuentaCreacionViewModel>(cuenta);
 
