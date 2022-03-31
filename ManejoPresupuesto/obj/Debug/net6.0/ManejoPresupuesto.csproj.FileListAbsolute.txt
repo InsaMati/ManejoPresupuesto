@@ -65,7 +65,6 @@ C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\bin\Debug
 C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\bin\Debug\net6.0\ManejoPresupuesto.deps.json
 C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\bin\Debug\net6.0\ManejoPresupuesto.runtimeconfig.json
 C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\bin\Debug\net6.0\ManejoPresupuesto.dll
-C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\bin\Debug\net6.0\ref\ManejoPresupuesto.dll
 C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\bin\Debug\net6.0\ManejoPresupuesto.pdb
 C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
@@ -120,3 +119,4 @@ C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\obj\Debug
 C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\obj\Debug\net6.0\ref\ManejoPresupuesto.dll
 C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\obj\Debug\net6.0\ManejoPresupuesto.pdb
 C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\obj\Debug\net6.0\ManejoPresupuesto.genruntimeconfig.cache
+C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\obj\Debug\net6.0\refint\ManejoPresupuesto.dll
