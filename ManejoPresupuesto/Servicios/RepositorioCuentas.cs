@@ -45,11 +45,11 @@ namespace ManejoPresupuesto.Servicios
         {
             using var connection = new SqlConnection(connectionString);
             return await connection.QueryFirstOrDefaultAsync<Cuenta>(
-                @"select Cuentas.id, Cuentas.Nombre, balance, Descripcion, tc.TipoCuentaId
-                                                      from cuentas
-                                                      inner join TiposCuentas tc
-                                                      on tc.id = cuentas.TipoCuentaId
-                                                      where tc.UsuarioId = @UsuarioId AND Cuentas.id @Id", new {id,usuarioId});
+                 @"SELECT Cuentas.Id, Cuentas.Nombre, Balance, Descripcion, TipoCuentaId
+                FROM Cuentas
+                INNER JOIN TiposCuentas tc
+                ON tc.Id = Cuentas.TipoCuentaId
+                WHERE tc.UsuarioId = @UsuarioId AND Cuentas.Id = @Id", new { id, usuarioId });
         }
 
         public async Task Actualizar (CuentaCreacionViewModel cuenta)
