@@ -120,3 +120,7 @@ C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\obj\Debug
 C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\obj\Debug\net6.0\ManejoPresupuesto.pdb
 C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\obj\Debug\net6.0\ManejoPresupuesto.genruntimeconfig.cache
 C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\obj\Debug\net6.0\refint\ManejoPresupuesto.dll
+C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\bin\Debug\net6.0\ClosedXML.dll
+C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\bin\Debug\net6.0\DocumentFormat.OpenXml.dll
+C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\bin\Debug\net6.0\ExcelNumberFormat.dll
+C:\Users\matia\OneDrive\Escritorio\ManejoPresupuesto\ManejoPresupuesto\bin\Debug\net6.0\System.IO.Packaging.dll

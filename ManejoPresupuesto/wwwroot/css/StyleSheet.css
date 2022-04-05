@@ -5,7 +5,7 @@
 .contenedor-totales {
     display: flex;
     justify-content: space-around;
-    font-size: 26px;
+    font-size: 20px;
     text-align: center;
 }
 
