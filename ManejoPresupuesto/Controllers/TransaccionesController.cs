@@ -2,12 +2,14 @@
 using ClosedXML.Excel;
 using ManejoPresupuesto.Models;
 using ManejoPresupuesto.Servicios;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data;
 
 namespace ManejoPresupuesto.Controllers
 {
+    //[Authorize] //Authorize a nivel controlador
     public class TransaccionesController : Controller
     {
         private readonly IServiciosUsuarios servicioUsuarios;
@@ -31,7 +33,6 @@ namespace ManejoPresupuesto.Controllers
             this.mapper = mapper;
             this.servicioReportes = servicioReportes;
         }
-
         public async Task<IActionResult> Index(int mes, int año)
         {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
@@ -288,6 +289,22 @@ namespace ManejoPresupuesto.Controllers
             return Json(eventosCalendario);
         }
 
+        public async Task<JsonResult> ObtenerTransaccionesPorFecha(DateTime Fecha)
+        {
+
+            var usuarioId = servicioUsuarios.ObtenerUsuarioId();
+
+            var transacciones = await repositorioTransacciones.ObtenerPorUsuarioId(
+               new ParametroObtenerTransaccionesPorUsuario
+               {
+                   usuarioId = usuarioId,
+                   FechaInicio = Fecha,
+                   FechaFin = Fecha
+               });
+
+            return Json(transacciones);
+        } 
+
         public async Task<IActionResult> Crear()
         {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
@@ -406,7 +423,6 @@ namespace ManejoPresupuesto.Controllers
             {
                 return LocalRedirect(modelo.urlRetorno);
             }
-
 
         }
 
